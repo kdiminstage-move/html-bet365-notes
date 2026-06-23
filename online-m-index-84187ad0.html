@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MK体育 · 日常查询与对照指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f5f7;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      color: #2c2f33;
+      padding: 2rem 1rem;
+    }
+
+    .page {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    /* 卡片通用 */
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #e3e6ea;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.03);
+      padding: 1.8rem 2rem;
+      margin-bottom: 2rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    /* hero — 温和引导 */
+    .hero {
+      text-align: center;
+      padding: 2.8rem 1.8rem;
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #e6e9ed;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #1f2328;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #52575c;
+      max-width: 700px;
+      margin: 0 auto 1rem;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: #f0f2f5;
+      border-radius: 40px;
+      padding: 0.3rem 1.1rem;
+      font-size: 0.85rem;
+      color: #3a3f44;
+      border: 1px solid #dce0e5;
+      margin-top: 0.4rem;
+    }
+
+    /* 摘要区 */
+    .summary-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+    }
+
+    .summary-item {
+      flex: 1 1 200px;
+      min-width: 160px;
+    }
+
+    .summary-item h3 {
+      font-weight: 500;
+      font-size: 1.15rem;
+      border-bottom: 2px solid #eef0f3;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.7rem;
+      color: #1e2228;
+    }
+
+    .summary-item p {
+      font-size: 0.95rem;
+      color: #3d4147;
+    }
+
+    /* 特点卡片 */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #e3e7ec;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.01);
+      padding: 1.6rem 1.5rem;
+      transition: all 0.15s ease;
+    }
+
+    .feature-card:hover {
+      border-color: #cdd2d9;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03);
+      transform: translateY(-2px);
+    }
+
+    .feature-card h4 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #1e2329;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #444950;
+    }
+
+    /* 使用建议 & 场景 */
+    .scenario-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+    }
+
+    .scenario-box {
+      flex: 1 1 220px;
+      background: #ffffff;
+      border: 1px solid #e4e7eb;
+      border-radius: 18px;
+      padding: 1.5rem 1.4rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.01);
+    }
+
+    .scenario-box h4 {
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #1e2328;
+    }
+
+    .scenario-box p {
+      font-size: 0.92rem;
+      color: #454a50;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eef1f5;
+      border-radius: 30px;
+      padding: 0.15rem 0.8rem;
+      font-size: 0.75rem;
+      color: #3e4349;
+      margin-top: 0.5rem;
+      border: 1px solid #dadfe5;
+    }
+
+    /* FAQ 摘要 — 紧凑 */
+    .faq-list {
+      list-style: none;
+    }
+
+    .faq-list li {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .faq-list li:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #1d2126;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      color: #525960;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: #6b737c;
+      background: #f8f9fb;
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+      display: inline-block;
+      margin-top: 0.6rem;
+      border: 1px solid #e5e9ee;
+    }
+
+    /* 链接样式 —— 自然嵌入 */
+    a {
+      color: #2b6f9e;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      font-weight: 450;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    a:hover {
+      border-bottom-color: #2b6f9e;
+      color: #1a4a6e;
+    }
+
+    .footer-note {
+      margin-top: 2.4rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #767f89;
+      border-top: 1px solid #e2e6eb;
+      padding-top: 1.6rem;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .card {
+        padding: 1.4rem 1.2rem;
+      }
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>日常查询·对照·延伸阅读</h1>
+    <p>
+      一份关于体育资讯平台 <a href="https://online-m-mksports.com">MK体育</a> 的简明笔记，
+      从日常使用出发，梳理信息结构、内容侧重与适用场景。
+    </p>
+    <span class="badge">产品说明 · 温和视角</span>
+  </div>
+
+  <!-- 摘要卡片 -->
+  <div class="card">
+    <h2 style="font-weight: 500; font-size: 1.4rem; margin-bottom: 1.2rem;">摘要 · 平台印象</h2>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <h3>信息聚合</h3>
+        <p>覆盖赛事数据、赛程变化与球队动态，适合作为日常快速查询的参考来源。</p>
+      </div>
+      <div class="summary-item">
+        <h3>对照使用</h3>
+        <p>可与其他信息源交叉比对，辅助理解比赛背景、阵容与近期走势。</p>
+      </div>
+      <div class="summary-item">
+        <h3>延伸阅读</h3>
+        <p>部分内容附带分析视角，为更深入的讨论提供起点。</p>
+      </div>
+    </div>
+    <div style="margin-top: 1.2rem;">
+      <span class="note">非官方数据源，仅供参考与个人学习</span>
+    </div>
+  </div>
+
+  <!-- 亮点 → 特点卡片 -->
+  <div class="features">
+    <div class="feature-card">
+      <h4>结构清晰</h4>
+      <p>信息层级分明，赛程、积分、统计等模块排布规整，减少查找时的认知负担。</p>
+    </div>
+    <div class="feature-card">
+      <h4>更新节奏稳定</h4>
+      <p>主要联赛与杯赛的变动通常能在较短时间内反映，适合追踪常规进程。</p>
+    </div>
+    <div class="feature-card">
+      <h4>浏览体验流畅</h4>
+      <p>页面布局偏向实用，没有过度装饰，加载速度在日常网络下表现稳定。</p>
+    </div>
+    <div class="feature-card">
+      <h4>内容覆盖面较广</h4>
+      <p>从主流联赛到部分次级赛事均有收录，可满足一般查询与对照需求。</p>
+    </div>
+  </div>
+
+  <!-- 使用建议 + 场景 -->
+  <div class="card">
+    <h2 style="font-weight: 500; font-size: 1.4rem; margin-bottom: 1.2rem;">使用建议 & 常见场景</h2>
+    <div class="scenario-wrap">
+      <div class="scenario-box">
+        <h4>赛前信息对照</h4>
+        <p>比赛日快速查看双方近期战绩、阵容变动，结合其他来源综合判断。</p>
+        <span class="tag">日常查询</span>
+      </div>
+      <div class="scenario-box">
+        <h4>赛事回顾延伸</h4>
+        <p>赛后翻阅积分榜变化与数据统计，为自己的笔记或讨论补充素材。</p>
+        <span class="tag">延伸阅读</span>
+      </div>
+      <div class="scenario-box">
+        <h4>多平台比对</h4>
+        <p>与其他体育站点或官方数据交叉验证，形成更立体的理解。</p>
+        <span class="tag">对照</span>
+      </div>
+      <div class="scenario-box">
+        <h4>轻量浏览</h4>
+        <p>在没有特定目的时随意翻阅，保持对联赛格局的大致感知。</p>
+        <span class="tag">日常</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 + 可信但克制说明 -->
+  <div class="card">
+    <h2 style="font-weight: 500; font-size: 1.4rem; margin-bottom: 0.8rem;">一些常见疑问 · 简要回应</h2>
+    <ul class="faq-list">
+      <li>
+        <div class="faq-q">平台信息的准确度如何？</div>
+        <div class="faq-a">建议作为参考渠道之一，关键信息可与权威来源核对。体育数据变动频繁，任何单一来源都难免存在延迟或偏差。</div>
+      </li>
+      <li>
+        <div class="faq-q">是否涵盖所有赛事？</div>
+        <div class="faq-a">主要聚焦于热门联赛与杯赛，部分低级别或地区性赛事可能未被收录。可以结合其他专门网站补充。</div>
+      </li>
+      <li>
+        <div class="faq-q">可以在研究或文章里引用吗？</div>
+        <div class="faq-a">适合作为背景参考或线索提示。正式引用建议优先使用官方数据或一手来源。</div>
+      </li>
+    </ul>
+    <div style="margin-top: 1.2rem; background: #f9fafc; border-radius: 16px; padding: 0.8rem 1.2rem; border: 1px solid #e7eaf0;">
+      <p style="font-size: 0.95rem; color: #444b54;">
+        <strong>关于 <a href="https://online-m-mksports.com">MK体育</a> 的使用方式：</strong> 
+        适合在需要快速浏览赛事信息、对比不同数据源时作为辅助工具。保持开放心态，结合自身判断，不盲信单一信息。
+      </p>
+    </div>
+  </div>
+
+  <!-- 结语 -->
+  <div style="background: #ffffff; border-radius: 18px; border: 1px solid #e3e7ec; padding: 1.6rem 2rem; box-shadow: 0 3px 8px rgba(0,0,0,0.01);">
+    <p style="font-size: 1rem; color: #3d4248;">
+      以上内容围绕日常查询、对照和延伸阅读展开，仅代表个人使用体验。 
+      <a href="https://online-m-mksports.com">MK体育</a> 是众多体育信息入口之一，
+      合理使用、交叉验证、保持独立判断，才是获取可靠信息的关键。
+    </p>
+    <div style="margin-top: 1rem; font-size: 0.85rem; color: #7b848f;">
+      本页为产品说明式介绍，不构成推荐或背书。请根据自身需求理性选择。
+    </div>
+  </div>
+
+  <div class="footer-note">
+    · 温和 · 流畅 · 克制 ·
+  </div>
+
+</div>
+</body>
+</html>
